@@ -8,8 +8,8 @@ on:
   pull_request:
 
 env:
-  AZURE_WEBAPP_NAME: Azure-Eats-WebApp    
-  AZURE_WEBAPP_PACKAGE_PATH: './Source/Tailwind.Traders.Web'      
+  #AZURE_WEBAPP_NAME: Azure-Eats-WebApp    
+  #AZURE_WEBAPP_PACKAGE_PATH: './Source/Tailwind.Traders.Web'      
   ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
