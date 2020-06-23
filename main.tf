@@ -28,5 +28,3 @@ resource "azurerm_app_service" "webapp" {
   app_settings = var.app_settings
 
   }
-
-}
