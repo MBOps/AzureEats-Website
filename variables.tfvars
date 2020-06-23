@@ -11,5 +11,4 @@ app_settings = {
     productImagesUrl = "https://raw.githubusercontent.com/microsoft/TailwindTraders-Backend/master/Deploy/tailwindtraders-images/product-detail"
     Personalizer_ApiKey = ""
     Personalizer_Endpoint = ""
-
 }

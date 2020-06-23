@@ -4,8 +4,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-    name = "${var.resource_prefix}-RG"
-    location = var.location
+  name = "${var.resource_prefix}-RG"
+  location = var.location
 }
 
 resource "azurerm_app_service_plan" "asp" {
