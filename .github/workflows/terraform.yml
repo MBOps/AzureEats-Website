@@ -9,7 +9,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: Azure-Eats-WebApp    
-  AZURE_WEBAPP_PACKAGE_PATH: './Source'      
+  AZURE_WEBAPP_PACKAGE_PATH: './Source/Tailwind.Traders.Web'      
   ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
@@ -74,34 +74,30 @@ jobs:
         #   "tenantId":"${{ secrets.TENANT_ID }}"
         #   }'
 
-    # - name: Use Node.js
-    #   uses: actions/setup-node@v1
-    #   with:
-    #     node-version: 10.15.2
-
-    # - name: Install dependencies in client app
-    #   working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/ClientApp
-    #   run: npm install
-
-    - name: Setup .NET Core
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.15.2
+        
+    - name: Setup Dotnet 2.2.300
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.1.400
-
-    - name: Build with dotnet
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-      run: dotnet build --configuration Release
-
-    - name: dotnet publish
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        dotnet-version: '2.2.300'
+    
+    - name: 'Run dotnet build'
+      shell: bash
+      working-directory: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
       run: |
-        dotnet publish -c Release -o ./
-              
+        # pushd ./Source
+        dotnet build --configuration Release --output ./output
+        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' 
+        # popd
+            
     # deploy web app using Azure credentials
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'Azure-Eats-WebApp'
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
     # Azure logout 
     - name: logout

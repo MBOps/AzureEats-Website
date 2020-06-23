@@ -8,24 +8,24 @@ terraform {
 }
 
 provider "azurerm" {
-  version = "~>2.0"
-  features {}
+    version = "~>2.0"
+    features {}
 }
 
 resource "azurerm_resource_group" "rg" {
-  name = "Azure-Eats-RG"
-  location = "northeurope"
+    name = "Azure-Eats-RG"
+    location = "northeurope"
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name = "Azure-Eats-ASP"
-  location = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  sku {
+    name = "Azure-Eats-ASP"
+    location = azurerm_resource_group.rg.location
+    resource_group_name = azurerm_resource_group.rg.name
+    kind = "Windows"
+    sku {
     tier = "Basic"
     size = "B1"
-  }
+    }
 }
 
 resource "azurerm_app_service" "webapp" {
