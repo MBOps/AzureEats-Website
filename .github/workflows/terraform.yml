@@ -78,21 +78,25 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.15.2
-        
-    - name: Setup Dotnet 2.2.300
+
+    - name: Install dependencies in client app
+      working-directory: Source/Tailwind.Traders.Web/ClientApp
+      run: npm install
+
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.2.300'
-    
-    - name: 'Run dotnet build'
-      shell: bash
-      working-directory: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        dotnet-version: 2.1.400
+
+    - name: Build with dotnet
+      working-directory: Source/Tailwind.Traders.Web
+      run: dotnet build --configuration Release
+
+    - name: dotnet publish
+      working-directory: Source/Tailwind.Traders.Web
       run: |
-        # pushd ./Source
-        dotnet build --configuration Release --output ./output
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' 
-        # popd
-            
+        dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Source/Tailwind.Traders.Web
+              
     # deploy web app using Azure credentials
     - uses: azure/webapps-deploy@v2
       with:
