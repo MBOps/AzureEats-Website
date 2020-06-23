@@ -7,6 +7,14 @@ on:
     - master
   pull_request:
 
+env:
+  AZURE_WEBAPP_NAME: Azure-Eats-WebApp    
+  AZURE_WEBAPP_PACKAGE_PATH: './Source'      
+  ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+
 jobs:
   terraform:
     name: 'Terraform'
@@ -16,12 +24,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    
-    env:
-      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
 
     # Checkout the repository to the GitHub Actions runner
     steps:
@@ -64,13 +66,13 @@ jobs:
    
     - uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        # creds:   '{
-        #   "clientId": ${{secrets.CLIENT_ID}},
-        #   "clientSecret": ${{secrets.CLIENT_SECRET}},
-        #   "subscriptionId": ${{secrets.SUBSCRIPTION_ID}},
-        #   "tenantId": ${{secrets.TENANT_ID}}
-        # }'
+        #creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds:   '{
+          "clientId": ${{secrets.CLIENT_ID}},
+          "clientSecret": ${{secrets.CLIENT_SECRET}},
+          "subscriptionId": ${{secrets.SUBSCRIPTION_ID}},
+          "tenantId": ${{secrets.TENANT_ID}}
+        }'
         
     - name: Setup Dotnet 2.2.300
       uses: actions/setup-dotnet@v1
