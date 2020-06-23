@@ -25,6 +25,15 @@ resource "azurerm_app_service" "webapp" {
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.asp.id
 
-  app_settings = var.app_settings
+  app_settings = app_settings = {
+    WEBSITE_NODE_DEFAULT_VERSION = "10.15.2"
+    ApiUrl = ""
+    ApiUrlShoppingCart = ""
+    MongoConnectionString = ""
+    SqlConnectionString = ""
+    productImagesUrl = "https://raw.githubusercontent.com/microsoft/TailwindTraders-Backend/master/Deploy/tailwindtraders-images/product-detail"
+    Personalizer_ApiKey = ""
+    Personalizer_Endpoint = ""
+}
 
   }
