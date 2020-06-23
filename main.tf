@@ -3,53 +3,37 @@ provider "azurerm" {
   features {}
 }
 
-variable "resource_prefix" {
-  type        = string
-  description = "Prefix for Resources"
-}
-
-variable "location" {
-  type        = string
-  description = "Location of Resources"
-}
-
-variable "asp_tier" {
-  type        = string
-  description = "Tier of App Service Plan"
-}
-
-variable "asp_size" {
-  type        = string
-  description = "Size of App Service Plan"
-}
-
-variable "app_settings" {
-  type        = map(string)
-  description = "object containing app settings for the App Service"
-}
-
 resource "azurerm_resource_group" "rg" {
-  name = "${var.resource_prefix}-RG"
-  location = var.location
+  name = "Azure-Eats-RG"
+  location = "northeurope"
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name = "${var.resource_prefix}-ASP"
+  name = "Azure-Eats-ASP"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   sku {
-    tier = var.asp_tier
-    size = var.asp_size
+    tier = "Standard"
+    size = "S1"
   }
 }
 
 resource "azurerm_app_service" "webapp" {
-  name = "${var.resource_prefix}-WebApp"
+  name = "Azure-Eats-WebApp"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.asp.id
 
-  app_settings = var.app_settings
+  app_settings = {
+    WEBSITE_NODE_DEFAULT_VERSION = "10.15.2"
+    ApiUrl = ""
+    ApiUrlShoppingCart = ""
+    MongoConnectionString = ""
+    SqlConnectionString = ""
+    productImagesUrl = "https://raw.githubusercontent.com/microsoft/TailwindTraders-Backend/master/Deploy/tailwindtraders-images/product-detail"
+    Personalizer_ApiKey = ""
+    Personalizer_Endpoint = ""
+    }
 
   }
