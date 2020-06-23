@@ -1,7 +1,7 @@
 # Azure SQL
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "${var.resource_prefix}-storage"
+  name                     = lower("${var.resource_prefix}-storage")
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
   account_tier             = "Standard"
