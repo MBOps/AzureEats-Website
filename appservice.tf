@@ -1,5 +1,5 @@
 resource "azurerm_app_service_plan" "asp" {
-    name = "Azure-Eats-ASP"
+    name = "${var.resource_prefix}-ASP"
     location = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
     kind = "Windows"
@@ -10,7 +10,7 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 resource "azurerm_app_service" "webapp" {
-    name = "Azure-Eats-WebApp"
+    name = "${var.resource_prefix}-WebApp"
     location = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
     app_service_plan_id = azurerm_app_service_plan.asp.id
