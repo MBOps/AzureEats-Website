@@ -4,8 +4,8 @@ resource "azurerm_app_service_plan" "asp" {
     resource_group_name = azurerm_resource_group.rg.name
     kind = "Windows"
     sku {
-    tier = "Basic"
-    size = "B1"
+    tier = var.asp_tier
+    size = var.asp_size
     }
 }
 
