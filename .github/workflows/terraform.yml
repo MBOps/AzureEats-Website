@@ -80,7 +80,7 @@ jobs:
         node-version: 10.15.2
 
     - name: Install dependencies in client app
-      working-directory: Source/Tailwind.Traders.Web/ClientApp
+      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/ClientApp
       run: npm install
 
     - name: Setup .NET Core
@@ -89,19 +89,19 @@ jobs:
         dotnet-version: 2.1.400
 
     - name: Build with dotnet
-      working-directory: Source/Tailwind.Traders.Web
+      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       run: dotnet build --configuration Release
 
     - name: dotnet publish
-      working-directory: Source/Tailwind.Traders.Web
+      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       run: |
-        dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Source/Tailwind.Traders.Web
+        dotnet publish -c Release -o ./
               
     # deploy web app using Azure credentials
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'Azure-Eats-WebApp'
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
     # Azure logout 
     - name: logout
