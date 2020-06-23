@@ -13,6 +13,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-    name = "Azure-Eats-RG"
+    name = "${var.resource_prefix}-RG"
     location = var.location
 }
