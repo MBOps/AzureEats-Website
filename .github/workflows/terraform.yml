@@ -36,13 +36,12 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.12.25
+        args: '-var-file="dev.tfvars"'
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-      with:
-        args: '-var-file="dev.tfvars"'
-
+     
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
