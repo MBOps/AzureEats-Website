@@ -9,7 +9,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: Azure-Eats-WebApp    
-  AZURE_WEBAPP_PACKAGE_PATH: './Source'      
+  AZURE_WEBAPP_PACKAGE_PATH: './Source/Tailwind.Traders.Web'      
   ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
@@ -66,13 +66,13 @@ jobs:
    
     - uses: azure/login@v1
       with:
-        #creds: ${{ secrets.AZURE_CREDENTIALS }}
-        creds:   '{
-          "clientId": ${{secrets.CLIENT_ID}},
-          "clientSecret": ${{secrets.CLIENT_SECRET}},
-          "subscriptionId": ${{secrets.SUBSCRIPTION_ID}},
-          "tenantId": ${{secrets.TENANT_ID}}
-        }'
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # creds:   '{
+        #   "clientId": ${{secrets.CLIENT_ID}},
+        #   "clientSecret": ${{secrets.CLIENT_SECRET}},
+        #   "subscriptionId": ${{secrets.SUBSCRIPTION_ID}},
+        #   "tenantId": ${{secrets.TENANT_ID}}
+        # }'
         
     - name: Setup Dotnet 2.2.300
       uses: actions/setup-dotnet@v1
@@ -84,10 +84,10 @@ jobs:
       run: |
         # If your web app project is not located in your repository's root
         # Please consider using pushd to change your path
-        pushd ./Source
+        # pushd ./Source
         dotnet build --configuration Release --output ./output
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
-        popd
+        # popd
             
     # deploy web app using Azure credentials
     - uses: azure/webapps-deploy@v2
