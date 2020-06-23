@@ -14,5 +14,5 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
     name = "Azure-Eats-RG"
-    location = "northeurope"
+    location = var.location
 }
