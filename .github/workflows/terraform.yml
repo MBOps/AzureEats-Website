@@ -76,7 +76,7 @@ jobs:
       run: |
         # If your web app project is not located in your repository's root
         # Please consider using pushd to change your path
-        pushd .
+        pushd ./Source
         dotnet build --configuration Release --output ./output
         popd
             
