@@ -1,0 +1,1 @@
+resource_prefix = "Azure-Eats2"
