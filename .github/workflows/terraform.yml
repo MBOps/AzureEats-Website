@@ -53,12 +53,6 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve
 
-
-
-name: build and deploy     
-needs: terraform
-
-jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
