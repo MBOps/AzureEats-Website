@@ -14,8 +14,8 @@ resource "azurerm_app_service_plan" "asp" {
   resource_group_name = azurerm_resource_group.rg.name
 
   sku {
-    tier = var.asp_tier
-    size = var.asp_size
+    tier = "Standard"
+    size = "S1"
   }
 }
 
