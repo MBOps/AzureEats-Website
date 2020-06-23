@@ -74,14 +74,14 @@ jobs:
         #   "tenantId":"${{ secrets.TENANT_ID }}"
         #   }'
 
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.15.2
+    # - name: Use Node.js
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: 10.15.2
 
-    - name: Install dependencies in client app
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/ClientApp
-      run: npm install
+    # - name: Install dependencies in client app
+    #   working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/ClientApp
+    #   run: npm install
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
