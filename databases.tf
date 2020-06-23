@@ -8,8 +8,8 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_sql_server" "sql" {
-  name                         = "${var.resource_prefix}-SQL"
+resource "azurerm_sql_server" "SQL" {
+  name                         = lower("${var.resource_prefix}-SQL")
   location                     = azurerm_resource_group.rg.location
   resource_group_name          = azurerm_resource_group.rg.name
   version                      = "12.0"
