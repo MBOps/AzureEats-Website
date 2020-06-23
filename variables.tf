@@ -17,8 +17,3 @@ variable "asp_size" {
   type        = string
   description = "Size of App Service Plan"
 }
-
-variable "app_settings" {
-  type        = map(string)
-  description = "object containing app settings for the App Service"
-}
